@@ -45,6 +45,7 @@ public class Controller {
     }
     
     public void displayScoreScene() {
+        quiz.save();
         scoreScene = new ScoreScene(quiz.getScore(), quiz.getNumberOfQuestions());
         scoreScene.setController(this);
         mainStage.setScene(scoreScene.getScene());

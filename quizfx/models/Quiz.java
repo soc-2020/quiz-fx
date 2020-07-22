@@ -26,10 +26,21 @@ public class Quiz {
     }
     
     public void loadFromAPI(int catID, String difficulty) {
+        
+        //&type=multiple 
+        //&type=boolean
+        
+        loadQuestions("https://opentdb.com/api.php?amount=5&category=" + 
+                    catID + "&difficulty=" + difficulty + "&type=boolean");
+        loadQuestions("https://opentdb.com/api.php?amount=5&category=" + 
+                    catID + "&difficulty=" + difficulty + "&type=multiple");
+
+    }
+    
+    private void loadQuestions(String url) {
         InputStream inputAPI = null;
         try {
-            inputAPI = new URL("https://opentdb.com/api.php?amount=5&category=" + 
-                    catID + "&difficulty=" + difficulty).openStream();
+            inputAPI = new URL(url).openStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputAPI, Charset.forName("UTF-8")));
             String line = reader.readLine();
             JSONObject json = new JSONObject(line);
@@ -92,6 +103,14 @@ public class Quiz {
     
     public int getNumberOfQuestions() {
         return questions.size();
+    }
+    
+    
+    public void save() {
+        // open DB connection
+        
+        // save current score and user
+        
     }
       
 }
