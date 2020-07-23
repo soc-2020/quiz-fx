@@ -8,6 +8,7 @@ import quizfx.SelectionScene;
 import quizfx.models.Categories;
 import quizfx.models.Question;
 import quizfx.models.Quiz;
+import quizfx.models.User;
 
 public class Controller {
     
@@ -18,6 +19,7 @@ public class Controller {
     private ScoreScene scoreScene;
     private Quiz quiz;
     private Categories categories;
+    private User user;
     
     public Controller(MainStage m) {
         mainStage = m;
@@ -45,7 +47,7 @@ public class Controller {
     }
     
     public void displayScoreScene() {
-        quiz.save();
+        quiz.save(user);
         scoreScene = new ScoreScene(quiz.getScore(), quiz.getNumberOfQuestions());
         scoreScene.setController(this);
         mainStage.setScene(scoreScene.getScene());
@@ -59,6 +61,13 @@ public class Controller {
     public void nextQuestion() {
         Question q = quiz.getNextQuestion();
         quizScene.setQuestion(q);
+    }
+    
+    public void authenticate(String username, String password) {
+        user = User.find(username, password);
+        if(user != null) {
+            displayQuizSelection();
+        }
     }
     
 }
