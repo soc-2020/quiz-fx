@@ -40,7 +40,7 @@ public class User {
             Statement stmt = con.createStatement();
             String sql = "SELECT * FROM users WHERE username='" + 
                     username + "' AND password=MD5('" + password + "')";
-            System.err.println(sql);
+  
             ResultSet result = stmt.executeQuery(sql);
             
             if(result.next()) {

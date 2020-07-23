@@ -118,8 +118,8 @@ public class Quiz {
         try {
             Connection con = DBConn.getConnection();
             Statement stmt = con.createStatement();
-            stmt.executeUpdate("INSERT INTO scores (category, difficulty, score, users_id) " +
-                    "VALUES (" + catID + ", '" + difficulty + "', " + score + ", " + user.getId() + ")");
+            stmt.execute("INSERT INTO scores (category, difficulty, score, users_id, score_date) " +
+                    "VALUES (" + catID + ", '" + difficulty + "', " + score + ", " + user.getId() + ", NOW())");
         } catch (SQLException ex) {
             Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
         }
